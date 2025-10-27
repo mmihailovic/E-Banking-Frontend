@@ -1,6 +1,6 @@
 # E-Banking Project (Early Stage)
 
-This is the initial version of the **E-Banking** project. Currently, a two microfrontends are integrated using **Module Federation**, with the frontend built in **React + TypeScript**, state management via **Redux**, and **UI5 Web Components** for UI elements.
+This is the initial version of the **frontend part** of the **E-Banking** project, intended to work with the **microservices-based** [E-Banking application](https://github.com/mmihailovic/E-Banking). Currently, a two microfrontends are integrated using **Module Federation**, with the frontend built in **React + TypeScript**, state management via **Redux**, and **UI5 Web Components** for UI elements.
 
 ## Current Status
 
