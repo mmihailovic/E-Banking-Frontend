@@ -1,1 +1,1 @@
-import "@ui5/webcomponents-react/dist/Assets.js";
+import "@ui5/webcomponents-react/dist/Assets.js"

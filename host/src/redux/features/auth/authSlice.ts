@@ -1,76 +1,77 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import type { LoginCredentials, User } from '../../../types/auth.ts';
-import { makePostRequest } from '../../../utils/apiUtils.ts';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import type { LoginCredentials, User } from "../../../types/auth.ts"
+import { makePostRequest } from "../../../utils/apiUtils.ts"
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL
-const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT;
-const CHECK_CREDENTIALS_ENDPOINT = import.meta.env.VITE_CHECK_CREDENTIALS_ENDPOINT;
-const LOGOUT_ENDPOINT = import.meta.env.VITE_LOGOUT_ENDPOINT;
-console.log(LOGIN_ENDPOINT)
+const LOGIN_ENDPOINT = import.meta.env.VITE_LOGIN_ENDPOINT
+const CHECK_CREDENTIALS_ENDPOINT = import.meta.env
+  .VITE_CHECK_CREDENTIALS_ENDPOINT
+const LOGOUT_ENDPOINT = import.meta.env.VITE_LOGOUT_ENDPOINT
 
-export const login = createAsyncThunk('auth/login',
+export const login = createAsyncThunk(
+  "auth/login",
   async (credentials: LoginCredentials, { rejectWithValue }) => {
     try {
-      const response = await makePostRequest(`${BASE_URL}${LOGIN_ENDPOINT}`, credentials)
+      const response = await makePostRequest(
+        `${BASE_URL}${LOGIN_ENDPOINT}`,
+        credentials,
+      )
 
       return response.json()
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error)
     }
-  }
-);
+  },
+)
 
-export const checkCredentials = createAsyncThunk('auth/checkCredentials',
+export const checkCredentials = createAsyncThunk(
+  "auth/checkCredentials",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await makePostRequest(`${BASE_URL}${CHECK_CREDENTIALS_ENDPOINT}`)
-      console.log(response.json())
+      const response = await makePostRequest(
+        `${BASE_URL}${CHECK_CREDENTIALS_ENDPOINT}`,
+      )
       return response.json()
     } catch (error) {
-      return rejectWithValue(error);
+      return rejectWithValue(error)
     }
-  }
-);
+  },
+)
 
-export const logout = createAsyncThunk('auth/logout',
-    async (_, { rejectWithValue }) => {
-        try {
-            await makePostRequest(`${BASE_URL}${LOGOUT_ENDPOINT}`)
-            return true
-        } catch (error) {
-        return rejectWithValue(error);
-        }
+export const logout = createAsyncThunk(
+  "auth/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await makePostRequest(`${BASE_URL}${LOGOUT_ENDPOINT}`)
+      return true
+    } catch (error) {
+      return rejectWithValue(error)
     }
+  },
 )
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: null as User | null,
     isAuthenticated: false,
     loading: false,
-    error: null as any | null
+    error: null as any | null,
   },
-  reducers: {
-    // logout: (state) => {
-    //   localStorage.removeItem('jwt')
-    //   state.error = null
-    //   state.loading = false
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.loading = true
+        state.error = null
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
+        state.loading = false
+        state.error = null
         state.user = action.payload
         state.isAuthenticated = true
       })
       .addCase(login.rejected, (state, action) => {
-        state.loading = false;
+        state.loading = false
         state.error = action.payload
       })
       .addCase(logout.fulfilled, (state) => {
@@ -85,7 +86,6 @@ const authSlice = createSlice({
         state.isAuthenticated = false
       })
   },
-});
+})
 
-// export const { logout } = authSlice.actions;
-export default authSlice.reducer;
+export default authSlice.reducer

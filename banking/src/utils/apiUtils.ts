@@ -1,47 +1,44 @@
-// import { store } from '../redux/store';
+export async function makePostRequest(
+  endpoint: string,
+  body?: any,
+): Promise<Response> {
+  const response = await fetch(`${endpoint}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+    credentials: "include",
+  })
 
-export async function makePostRequest(endpoint:string, body?:any) :Promise<Response> {
-    // const dispatch = store.dispatch;
-    const response = await fetch(`${endpoint}`, {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body),
-        credentials: "include"
-    })
+  if (response.status == 401) {
+    throw new Error("UNAUTHORIZED: Session expired!")
+  }
 
-    if(response.status == 401) {
-        // dispatch(logout());
-        throw new Error("UNAUTHORIZED: Session expired!");
-    }
+  if (!response.ok) {
+    const errorText = await response.text()
 
-    if (!response.ok) {
-        const errorText = await response.text();
-    
-        throw new Error(errorText);
-    }
+    throw new Error(errorText)
+  }
 
-    return response;
+  return response
 }
 
-export async function makeGetRequest(endpoint:string) :Promise<Response> {
-    // const dispatch = store.dispatch;
-    const response = await fetch(`${endpoint}`, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'},
-        credentials: "include"
-    })
+export async function makeGetRequest(endpoint: string): Promise<Response> {
+  const response = await fetch(`${endpoint}`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  })
 
-    if(response.status == 401) {
-        // dispatch(logout());
-        throw new Error("UNAUTHORIZED: Session expired!");
-    }
+  if (response.status == 401) {
+    throw new Error("UNAUTHORIZED: Session expired!")
+  }
 
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || 'POST request failed');
-    }
+  if (!response.ok) {
+    const errorText = await response.text()
+    throw new Error(errorText || "POST request failed")
+  }
 
-    return response;
+  return response
 }
