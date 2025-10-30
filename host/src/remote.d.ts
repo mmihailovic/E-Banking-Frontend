@@ -3,9 +3,9 @@ declare module 'banking/BankAccountDetailsPage' {
   export default BankAccountDetailsPage;
 }
 
-declare module 'banking/AllUsersBankAccounts' {
-  const AllUsersBankAccounts: React.ComponentType<>; 
-  export default AllUsersBankAccounts;
+declare module 'banking/BankAccountsPage' {
+  const BankAccountsPage: React.ComponentType<>; 
+  export default BankAccountsPage;
 }
 
 declare module 'banking/CardsPage' {
@@ -16,4 +16,9 @@ declare module 'banking/CardsPage' {
 declare module 'banking/CreditsPage' {
   const CreditPage: React.ComponentType<>; 
   export default CreditPage;
+}
+
+declare module 'banking/DashboardPage' {
+  const DashboardPage: React.ComponentType<>; 
+  export default DashboardPage;
 }

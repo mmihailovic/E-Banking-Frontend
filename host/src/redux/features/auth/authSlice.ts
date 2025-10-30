@@ -31,7 +31,7 @@ export const checkCredentials = createAsyncThunk(
       const response = await makePostRequest(
         `${BASE_URL}${CHECK_CREDENTIALS_ENDPOINT}`,
       )
-      return response.json()
+      return await response.json()
     } catch (error) {
       return rejectWithValue(error)
     }

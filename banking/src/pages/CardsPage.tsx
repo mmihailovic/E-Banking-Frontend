@@ -3,8 +3,8 @@ import { useAppDispatch } from "../hooks/hooks"
 import { loadCards } from "../redux/features/cards/cardsSlice"
 import { Provider } from "react-redux"
 import { store } from "../redux/store"
-import AllUsersCards from "../components/AllUsersCards"
 import { Title } from "@ui5/webcomponents-react"
+import AllCards from "../components/AllCards"
 
 export const Cards: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -17,7 +17,7 @@ export const Cards: React.FC = () => {
     <div className="container">
       <div className="content">
         <Title>Cards</Title>
-        <AllUsersCards />
+        <AllCards />
       </div>
     </div>
   )

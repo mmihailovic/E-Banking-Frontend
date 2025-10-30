@@ -1,15 +1,9 @@
-import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "../hooks/hooks"
-import {
-  loadBankAccounts,
-  setSelectedBankAccountNumber,
-} from "../redux/features/bankAccounts/bankAccountsSlice"
+import { setSelectedBankAccountNumber } from "../redux/features/bankAccounts/bankAccountsSlice"
 import { AnalyticalTable } from "@ui5/webcomponents-react"
-import { Provider } from "react-redux"
-import { store } from "../redux/store"
 
-export const AllUsersBankAccountsComponent: React.FC = () => {
+export const AllBankAccounts: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { bankAccounts } = useAppSelector((state) => state.bankAccounts)
@@ -26,10 +20,6 @@ export const AllUsersBankAccountsComponent: React.FC = () => {
     navigate("/bank-account")
   }
 
-  useEffect(() => {
-    dispatch(loadBankAccounts())
-  }, [dispatch])
-
   return (
     <AnalyticalTable
       data={bankAccounts}
@@ -39,13 +29,3 @@ export const AllUsersBankAccountsComponent: React.FC = () => {
     />
   )
 }
-
-const AllUsersBankAccounts: React.FC = () => {
-  return (
-    <Provider store={store}>
-      <AllUsersBankAccountsComponent />
-    </Provider>
-  )
-}
-
-export default AllUsersBankAccounts

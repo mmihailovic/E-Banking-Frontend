@@ -5,7 +5,6 @@ import { Provider } from "react-redux"
 import { store } from "./redux/store.ts"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { LoginPage } from "./pages/LoginPage.tsx"
-import { HomePage } from "./pages/HomePage.tsx"
 import { ProtectedRoute } from "./pages/ProtectedRoute.tsx"
 import { ThemeProvider } from "@ui5/webcomponents-react"
 import { Layout } from "./components/Layout.tsx"
@@ -16,6 +15,8 @@ const BankAccountDetailsPage = lazy(
 )
 const CardsPage = lazy(() => import("banking/CardsPage"))
 const CreditsPage = lazy(() => import("banking/CreditsPage"))
+const BankAccountsPage = lazy(() => import("banking/BankAccountsPage"))
+const DashboardPage = lazy(() => import("banking/DashboardPage"))
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
@@ -26,10 +27,12 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<Layout />}>
               <Route
-                path="/dashboard"
+                path="/bank-accounts"
                 element={
                   <ProtectedRoute>
-                    <HomePage />
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <BankAccountsPage />
+                    </Suspense>
                   </ProtectedRoute>
                 }
               />
@@ -59,6 +62,16 @@ createRoot(document.getElementById("root")!).render(
                   <ProtectedRoute>
                     <Suspense fallback={<div>Loading...</div>}>
                       <CreditsPage />
+                    </Suspense>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Suspense fallback={<div>Loading...</div>}>
+                      <DashboardPage />
                     </Suspense>
                   </ProtectedRoute>
                 }

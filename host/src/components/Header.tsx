@@ -12,7 +12,7 @@ export const Header: FC = () => {
         <>
           <Button
             onClick={() => {
-              navigate("/dashboard")
+              navigate("/bank-accounts")
             }}
             design="Transparent"
           >
@@ -33,6 +33,14 @@ export const Header: FC = () => {
             design="Transparent"
           >
             Credits
+          </Button>
+          <Button
+            onClick={() => {
+              navigate("/dashboard")
+            }}
+            design="Transparent"
+          >
+            Dashboard
           </Button>
         </>
       }

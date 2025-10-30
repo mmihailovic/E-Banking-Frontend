@@ -78,3 +78,34 @@ export interface ApplyForCredit {
   loanTerm: number
   bankAccountNumber: number
 }
+
+export interface CreateCurrentBankAccount {
+  JMBG: number
+  accountType: string
+  maintenancePrice: number
+}
+
+export interface CreateForeignBankAccount {
+  JMBG: number
+  currencyId: number
+  maintenancePrice: number
+}
+
+export interface CreateBusinessBankAccount {
+  TIN: number
+}
+
+export interface CardIssuer {
+  id: number
+  name: string
+  MII: number
+  BIN: number
+}
+
+export interface CreateCard {
+  type: string
+  issuerId: number
+  name: string
+  bankAccountNumber: number
+  limit: number
+}

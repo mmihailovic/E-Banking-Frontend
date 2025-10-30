@@ -10,7 +10,7 @@ export const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/dashboard")
+      navigate("/bank-accounts")
     }
   }, [isAuthenticated, navigate])
 

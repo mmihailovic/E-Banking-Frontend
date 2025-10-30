@@ -10,9 +10,10 @@ export default defineConfig({
       filename: "remoteEntry.js",
       exposes: {
         "./BankAccountDetailsPage": "./src/pages/BankAccountDetailsPage.tsx",
-        "./AllUsersBankAccounts": "./src/components/AllUsersBankAccounts.tsx",
+        "./BankAccountsPage": "./src/pages/BankAccountsPage.tsx",
         "./CardsPage": "./src/pages/CardsPage.tsx",
         "./CreditsPage": "./src/pages/CreditPage.tsx",
+        "./DashboardPage": "./src/pages/DashboardPage.tsx"
       },
       shared: [
         "react",

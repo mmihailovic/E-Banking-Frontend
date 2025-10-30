@@ -15,7 +15,7 @@ export async function makePostRequest(
     credentials: "include",
   })
 
-  if (response.status == 401) {
+  if (response.status == 401 || response.status == 403) {
     dispatch(logout())
     throw new Error("UNAUTHORIZED: Session expired!")
   }

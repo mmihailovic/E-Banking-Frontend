@@ -1,7 +1,7 @@
 import { useAppSelector } from "../hooks/hooks"
 import { AnalyticalTable } from "@ui5/webcomponents-react"
 
-export const AllUsersCards: React.FC = () => {
+export const AllCards: React.FC = () => {
   const { cards } = useAppSelector((state) => state.cards)
 
   const columns = [
@@ -17,12 +17,8 @@ export const AllUsersCards: React.FC = () => {
   ]
 
   return (
-    <AnalyticalTable
-      data={cards}
-      columns={columns}
-      scaleWidthMode="Smart"
-    />
+    <AnalyticalTable data={cards} columns={columns} scaleWidthMode="Smart" />
   )
 }
 
-export default AllUsersCards
+export default AllCards
