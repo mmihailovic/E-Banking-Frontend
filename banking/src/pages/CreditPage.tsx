@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { useAppDispatch } from "../hooks/hooks"
+import { useAppDispatch, useAppSelector } from "../hooks/hooks"
 import { Provider } from "react-redux"
 import { store } from "../redux/store"
 import { Title, Text, Button } from "@ui5/webcomponents-react"
@@ -18,6 +18,7 @@ import { loadBankAccounts } from "../redux/features/bankAccounts/bankAccountsSli
 export const Credits: React.FC = () => {
   const dispatch = useAppDispatch()
   const [openDialog, setOpenDialog] = useState(false)
+  const { selectedCreditType } = useAppSelector((state) => state.credits)
 
   useEffect(() => {
     dispatch(loadCurrencies())
@@ -35,7 +36,12 @@ export const Credits: React.FC = () => {
         <CreditRequests />
         <Title level="H3">Do you want to take out a loan?</Title>
         <Text>Select one from the offer.</Text>
-        <Button onClick={() => setOpenDialog(true)}>Apply for credit</Button>
+        <Button
+          onClick={() => setOpenDialog(true)}
+          disabled={selectedCreditType == null}
+        >
+          Apply for credit
+        </Button>
         <ApplyForCreditDialog
           open={openDialog}
           onClose={() => setOpenDialog(false)}

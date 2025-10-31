@@ -16,7 +16,7 @@ export const BankAccounts: React.FC = () => {
   return (
     <div className="container">
       <Title>Bank Accounts</Title>
-      <AllBankAccounts />
+      <AllBankAccounts showDetails={true} />
     </div>
   )
 }

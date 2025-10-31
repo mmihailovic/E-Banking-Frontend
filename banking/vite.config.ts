@@ -13,7 +13,8 @@ export default defineConfig({
         "./BankAccountsPage": "./src/pages/BankAccountsPage.tsx",
         "./CardsPage": "./src/pages/CardsPage.tsx",
         "./CreditsPage": "./src/pages/CreditPage.tsx",
-        "./DashboardPage": "./src/pages/DashboardPage.tsx"
+        "./ManageCardsPage": "/src/pages/ManageCardsPage.tsx",
+        "./ManageBankAccountsPage": "/src/pages/ManageBankAccountsPage.tsx",
       },
       shared: [
         "react",

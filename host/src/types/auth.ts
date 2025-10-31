@@ -7,5 +7,5 @@ export interface User {
   id: number
   username: string
   companyId: number
-  roles: []
+  roles: string[]
 }

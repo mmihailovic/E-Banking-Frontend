@@ -197,6 +197,9 @@ const bankAccountsSlice = createSlice({
       .addCase(createBusinessBankAccount.fulfilled, (state, action) => {
         state.bankAccounts.push(action.payload)
       })
+      .addCase(loadAllBankAccounts.fulfilled, (state, action) => {
+        state.bankAccounts = action.payload
+      })
   },
 })
 export const { setSelectedBankAccountNumber } = bankAccountsSlice.actions

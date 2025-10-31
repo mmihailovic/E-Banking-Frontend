@@ -7,12 +7,28 @@ const LOAD_CARDS_ENDPOINT = import.meta.env.VITE_LOAD_CARDS_ENDPOINT
 const CREATE_CARD_ENDPOINT = import.meta.env.VITE_CREATE_CARD_ENDPOINT
 const LOAD_CARD_ISSUERS_ENDPOINT = import.meta.env
   .VITE_LOAD_CARD_ISSUERS_ENDPOINT
+const LOAD_ALL_CARDS_ENDPOINT = import.meta.env.VITE_LOAD_ALL_CARDS_ENDPOINT
 
 export const loadCards = createAsyncThunk(
   "cards/loadCards",
   async (_, { rejectWithValue }) => {
     try {
       const response = await makeGetRequest(`${BASE_URL}${LOAD_CARDS_ENDPOINT}`)
+
+      return await response.json()
+    } catch (error) {
+      return rejectWithValue(error)
+    }
+  },
+)
+
+export const loadAllCards = createAsyncThunk(
+  "cards/loadAllCards",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await makeGetRequest(
+        `${BASE_URL}${LOAD_ALL_CARDS_ENDPOINT}`,
+      )
 
       return await response.json()
     } catch (error) {
@@ -85,6 +101,11 @@ const cardsSlice = createSlice({
         state.loading = false
         state.error = null
         state.cards.push(action.payload)
+      })
+      .addCase(loadAllCards.fulfilled, (state, action) => {
+        state.loading = false
+        state.error = null
+        state.cards = action.payload
       })
   },
 })

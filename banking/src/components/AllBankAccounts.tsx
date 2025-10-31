@@ -3,7 +3,13 @@ import { useAppDispatch, useAppSelector } from "../hooks/hooks"
 import { setSelectedBankAccountNumber } from "../redux/features/bankAccounts/bankAccountsSlice"
 import { AnalyticalTable } from "@ui5/webcomponents-react"
 
-export const AllBankAccounts: React.FC = () => {
+interface AllBankAccountsProps {
+  showDetails: boolean
+}
+
+export const AllBankAccounts: React.FC<AllBankAccountsProps> = ({
+  showDetails,
+}) => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
   const { bankAccounts } = useAppSelector((state) => state.bankAccounts)
@@ -15,6 +21,7 @@ export const AllBankAccounts: React.FC = () => {
   ]
 
   const handleRowClick = (event: any) => {
+    if (!showDetails) return
     const selectedBankAccount = event.detail.row.original
     dispatch(setSelectedBankAccountNumber(selectedBankAccount.accountNumber))
     navigate("/bank-account")

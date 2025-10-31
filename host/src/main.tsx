@@ -1,4 +1,4 @@
-import { StrictMode, lazy, Suspense } from "react"
+import { StrictMode, lazy } from "react"
 import { createRoot } from "react-dom/client"
 import "./index.css"
 import { Provider } from "react-redux"
@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./pages/ProtectedRoute.tsx"
 import { ThemeProvider } from "@ui5/webcomponents-react"
 import { Layout } from "./components/Layout.tsx"
 import "@ui5/webcomponents/dist/Assets.js"
+import SuspenseComponent from "./components/SuspenseComponent.tsx"
 
 const BankAccountDetailsPage = lazy(
   () => import("banking/BankAccountDetailsPage"),
@@ -16,7 +17,10 @@ const BankAccountDetailsPage = lazy(
 const CardsPage = lazy(() => import("banking/CardsPage"))
 const CreditsPage = lazy(() => import("banking/CreditsPage"))
 const BankAccountsPage = lazy(() => import("banking/BankAccountsPage"))
-const DashboardPage = lazy(() => import("banking/DashboardPage"))
+const ManageCardsPage = lazy(() => import("banking/ManageCardsPage"))
+const ManageBankAccountsPage = lazy(
+  () => import("banking/ManageBankAccountsPage"),
+)
 
 createRoot(document.getElementById("root")!).render(
   <ThemeProvider>
@@ -29,58 +33,76 @@ createRoot(document.getElementById("root")!).render(
               <Route
                 path="/bank-accounts"
                 element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <BankAccountsPage />
-                    </Suspense>
-                  </ProtectedRoute>
+                  <ProtectedRoute
+                    roles={["ROLE_CLIENT"]}
+                    children={
+                      <SuspenseComponent children={<BankAccountsPage />} />
+                    }
+                  />
                 }
               />
               <Route
                 path="/bank-account"
                 element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <BankAccountDetailsPage />
-                    </Suspense>
-                  </ProtectedRoute>
+                  <ProtectedRoute
+                    roles={["ROLE_CLIENT"]}
+                    children={
+                      <SuspenseComponent
+                        children={<BankAccountDetailsPage />}
+                      />
+                    }
+                  />
                 }
               />
               <Route
                 path="/cards"
                 element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <CardsPage />
-                    </Suspense>
-                  </ProtectedRoute>
+                  <ProtectedRoute
+                    roles={["ROLE_CLIENT"]}
+                    children={<SuspenseComponent children={<CardsPage />} />}
+                  />
                 }
               />
               <Route
                 path="/credits"
                 element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <CreditsPage />
-                    </Suspense>
-                  </ProtectedRoute>
+                  <ProtectedRoute
+                    roles={["ROLE_CLIENT"]}
+                    children={<SuspenseComponent children={<CreditsPage />} />}
+                  />
                 }
               />
-              <Route
-                path="/dashboard"
-                element={
-                  <ProtectedRoute>
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <DashboardPage />
-                    </Suspense>
-                  </ProtectedRoute>
-                }
-              />
+              <Route path="/manage">
+                <Route
+                  path="bank-accounts"
+                  element={
+                    <ProtectedRoute
+                      roles={["ROLE_MANAGE_BANK_ACCOUNTS"]}
+                      children={
+                        <SuspenseComponent
+                          children={<ManageBankAccountsPage />}
+                        />
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="cards"
+                  element={
+                    <ProtectedRoute
+                      roles={["ROLE_MANAGE_CARDS"]}
+                      children={
+                        <SuspenseComponent children={<ManageCardsPage />} />
+                      }
+                    />
+                  }
+                />
+              </Route>
             </Route>
             <Route path="*" element={<Navigate to="/login" />} />
           </Routes>
         </BrowserRouter>
       </Provider>
     </StrictMode>
-  </ThemeProvider>,
+  </ThemeProvider>
 )

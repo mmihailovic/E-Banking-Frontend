@@ -25,8 +25,9 @@ export const CreateBankAccountDialog: React.FC<
 > = ({ open, onClose }) => {
   const { currencies } = useAppSelector((state) => state.credits)
   const [currencyId, setCurrencyId] = useState(0)
-  const [bankAccountType, setBankAccountType] = useState()
-  const [currentBankAccountType, setCurrentBankAccountType] = useState("")
+  const [bankAccountType, setBankAccountType] = useState("CURRENT")
+  const [currentBankAccountType, setCurrentBankAccountType] =
+    useState("PERSONAL")
   const [identifier, setIdentifier] = useState(0)
   const [maintenancePrice, setMaintenancePrice] = useState(0)
   const dispatch = useAppDispatch()
@@ -36,7 +37,7 @@ export const CreateBankAccountDialog: React.FC<
   }, [currencies])
 
   const handleSubmit = () => {
-    if (bankAccountType == "CURRRENT")
+    if (bankAccountType == "CURRENT")
       dispatch(
         createCurrentBankAccount({
           JMBG: identifier,

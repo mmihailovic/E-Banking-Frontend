@@ -53,10 +53,10 @@ export const CreateCardDialog: React.FC<CreateCardDialogProps> = ({
       <FlexBox direction={FlexBoxDirection.Column}>
         <Select onChange={(e: any) => setType(e.detail.selectedOption.value)}>
           <Option key={"CREDIT"} value={"CREDIT"}>
-            Current
+            Credit
           </Option>
           <Option key={"DEBIT"} value={"DEBIT"}>
-            Foreign
+            Debit
           </Option>
         </Select>
 

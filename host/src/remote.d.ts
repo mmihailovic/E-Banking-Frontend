@@ -18,7 +18,17 @@ declare module 'banking/CreditsPage' {
   export default CreditPage;
 }
 
-declare module 'banking/DashboardPage' {
-  const DashboardPage: React.ComponentType<>; 
-  export default DashboardPage;
+declare module 'banking/ManageCardsPage' {
+  const ManageCardsPage: React.ComponentType<>; 
+  export default ManageCardsPage;
+}
+
+declare module 'banking/ManageCreditsPage' {
+  const ManageCreditsPage: React.ComponentType<>; 
+  export default ManageCreditsPage;
+}
+
+declare module 'banking/ManageBankAccountsPage' {
+  const ManageBankAccountsPage: React.ComponentType<>; 
+  export default ManageBankAccountsPage;
 }
